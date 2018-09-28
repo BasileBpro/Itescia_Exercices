@@ -5,15 +5,14 @@ etatDate = False
 listeMois = ["janvier", "fevrier", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "decembre"]
 listeNovDec = ["novembre", "decembre"]
 listePair=["avril","juin","septembre","novembre"]
-date = input("Quel jour souhaitez vous connaître sous la forme \'5 fevrier 2018\'")
+date = input("Quel jour souhaitez vous connaître sous la forme \'5 fevrier 2018\'\n")
 def verifDate(date):
     listeDate = date.split(" ")
+    if (len(listeDate)!=3):
+        return False
     if(listeDate[1] in listeMois):
-        print("Le mois est bon")
         if(int(listeDate[0])>0 and int(listeDate[0])<32):
-            print("Le jour est bon")
             if(int(listeDate[2])>=1582):
-                print("L'année est bonne")
                 etatDate = True
             else:
                  etatDate = False
@@ -36,6 +35,7 @@ def verifDate(date):
             etatDate = True
         else :
             etatDate = False
+    
     if(etatDate):
         return True
     else:
@@ -43,12 +43,11 @@ def verifDate(date):
 
 while etat!=True:
     if verifDate(date)==False:
-        date = input("Veuillez ne pas mettre d'accent ou de majuscule, n'oubliez pas les espaces et insérer une date valide après le 1 novembre 1582")
+        date = input("Veuillez ne pas mettre d'accent ou de majuscule, n'oubliez pas les espaces et insérer une date valide après le 1 novembre 1582\n")
     else :
         etat = True
 somme = 0
 
- #date = input("Quel jour souhaitez vous connaître sous la forme \'5 fevrier 2018\'")
 
 
 # Recupération des deux derniers chiffres de l'année
