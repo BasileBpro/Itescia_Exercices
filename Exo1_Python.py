@@ -3,13 +3,17 @@ from math import *
 etat = False
 etatDate = False
 listeMois = ["janvier", "fevrier", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "decembre"]
+#Mois valide en 1582
 listeNovDec = ["novembre", "decembre"]
+#Mois disposant de  30 jours
 listePair=["avril","juin","septembre","novembre"]
 date = input("Quel jour souhaitez vous connaître sous la forme \'5 fevrier 2018\'\n")
 def verifDate(date):
     listeDate = date.split(" ")
+    #Verification de la bonne écriture du mois 
     if (len(listeDate)!=3):
         return False
+    #Vérification du jour, mois et année
     if(listeDate[1] in listeMois):
         if(int(listeDate[0])>0 and int(listeDate[0])<32):
             if(int(listeDate[2])>=1582):
@@ -20,14 +24,17 @@ def verifDate(date):
             etatDate = False
     else:
         etatDate = False
+    #Verification de la date en 1582
     if(int(listeDate[2]) == 1582 and etatDate):
         if(listeDate[1] in listeNovDec):
             etatDate = True
         else:
             etatDate = False
+    #Verification du jour selon le mois (31 ou 30)
     if(etatDate and listeDate[1] in listePair):
         if(int(listeDate[0])>30):
             etatDate = False
+    #Verification du jour selon l'année bissextile en fevrier
     if(etatDate and listeDate[1]=="fevrier"):
         if(int(listeDate[2]) % 4 == 0 and int(listeDate[2]) % 100 != 0 and int(listeDate[0]) < 30):
             etatDate = True
@@ -35,12 +42,13 @@ def verifDate(date):
             etatDate = True
         else :
             etatDate = False
-    
+    #Retourne si la date est valide ou non
     if(etatDate):
         return True
     else:
         return False
 
+#Saisie de la date et verification de celle-ci
 while etat!=True:
     if verifDate(date)==False:
         date = input("Veuillez ne pas mettre d'accent ou de majuscule, n'oubliez pas les espaces et insérer une date valide après le 1 novembre 1582\n")
